@@ -14,7 +14,7 @@ to the codeword sent, but with random noise.  This software currently
 handles only memoryless binary channels, for which each bit sent
 through the channel results in a separate piece of data being
 received, and the noise affecting one bit is independent of the noise
-affecting other bits. 
+affecting other bits.
 
 <P>For a <I>Binary Symmetric Channel</I> (BSC), each bit sent
 results in a bit being received.  The bit received differs from the
@@ -60,7 +60,7 @@ at which they operate, where <I>R</I>=<I>K</I>/<I>N</I> is the rate
 of the code, and <I>s</I> is the noise level at which the code
 achieves the quoted bit error rate.  Hence, a code operating at a lower
 rate is allowed to assume a lower noise level to make the comparison fair.
-It is common to quote 
+It is common to quote
 <I>E<SUB><SMALL>b</SMALL></SUB></I> /
 <I>N<SUB><SMALL>0</SMALL></SUB></I> in decibels (db), equal to
 10 log<SUB><SMALL>10</SMALL></SUB>(<I>E<SUB><SMALL>b</SMALL></SUB></I>
@@ -74,16 +74,24 @@ noise is
 (1/<I>w</I>) exp(-<I>n</I>/<I>w</I>) / [1 + exp(-<I>n</I>/<I>w</I>)]<SUP>2</SUP>
 </BLOCKQUOTE>
 where <I>n</I> is the amount of noise, and <I>w</I> is a width parameter
-for the distribution, analogous to the <I>s</I> parameter for 
+for the distribution, analogous to the <I>s</I> parameter for
 Gaussian noise.  (However, <I>w</I> is not equal to the standard deviation
-for the logistic distribution, which is 
+for the logistic distribution, which is
 sqrt(pi<SUP><SMALL>2</SMALL></SUP>/3)<I>w</I>.)  <B>Note:</B> Although I've
-named this channel in analogy with the AWGN channel, it does not share 
+named this channel in analogy with the AWGN channel, it does not share
 the properties discussed above regarding how noise levels would be expected
-to change when the data rate changes. 
+to change when the data rate changes.
 
 
-<P><A NAME="transmit"><HR><B>transmit</B>: Transmit bits through a 
+<P>For a <I>Miscellaneous Channel</I> (MISC), each bit sent
+results in an LLR being received. Parameter should be provided but will be ignored.
+The LLR is computed as log (Pr (received symbol | send 0)/Pr (received symbol | send 1))
+where the log is computed in the natural base e.
+The input file should have these floating point LLRs written as
+space-separated text values (e.g., -1.001 0.0 2.54). Note that this channel is only
+support for the decode operation and not for the transmit operation.
+
+<P><A NAME="transmit"><HR><B>transmit</B>: Transmit bits through a
 simulated channel.
 
 <BLOCKQUOTE><PRE>
@@ -122,7 +130,7 @@ of a linear code with a symmetrical channel and a symmetrical decoding
 algorithm.  <B>Warning:</B> Ties, messages that lead to floating-point
 overflow, and program bugs can easily make a decoding algorithm
 non-symmetrical, so it's best not to test exclusively on zero
-messages. Indeed, it is best not to do this at all unless you 
+messages. Indeed, it is best not to do this at all unless you
 really need to avoid the time needed to generate and encode random
 messages.
 
@@ -142,10 +150,10 @@ specifying the characteristics of the channel, as follows:
 <P>BSC: The probability that a bit will be flipped by noise - ie, the
         probability that the bit received is an error.
 
-<P>AWGN: The standard deviation of the Gaussian noise that is added to the 
+<P>AWGN: The standard deviation of the Gaussian noise that is added to the
          encodings of the bits.
 
-<P>AWLN: The width parameter of the logistic distribution for the noise 
+<P>AWLN: The width parameter of the logistic distribution for the noise
          that is added to the encodings of the bits.
 </BLOCKQUOTE>
 

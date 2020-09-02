@@ -34,7 +34,7 @@ the bits in the block represented by the characters '0' and '1', with
 no intervening spaces.  If the bit count is given by a single number,
 the block size is assumed to be one.
 
-<P><B>Example:</B> The following command produces a file containing 
+<P><B>Example:</B> The following command produces a file containing
 3 blocks, each consisting of 15 random bits, produced using the pseudo-random
 number stream identified by the <TT><I>seed</I></TT> of 17:
 <UL><PRE>
@@ -49,7 +49,7 @@ like the following:
 </BLOCKQUOTE></PRE>
 
 
-<P><A NAME="verify"><HR><B>verify</B>: Verify that decoded blocks are 
+<P><A NAME="verify"><HR><B>verify</B>: Verify that decoded blocks are
 codewords, and that they match the source.
 
 <BLOCKQUOTE><PRE>
@@ -70,7 +70,7 @@ than a file of encoded data.)
 <P>A summary of the results is displayed on standard error, giving the
 total numbers of blocks, the number with parity check errors, and, if
 <TT><I>gen-file</I></TT> was specified, the number of blocks with
-source errors and the number with errors of both kinds.  If 
+source errors and the number with errors of both kinds.  If
 <TT><I>gen-file</I></TT> was specified, a second
 summary line displays the bit error rate from
 comparing the decoded message bits with the true message bits (zeros
@@ -92,6 +92,16 @@ bits in <TT><I>decoded-file</I></TT> is not a multiple of the block
 length, or if <TT><I>source-file</I></TT> is too short.  Newlines
 in these files are ignored, even though they would normally occur
 at the ends of blocks.
+
+<P><A NAME="extract_systematic"><HR><B>extract_systematic</B>: Extract the message bits from a block.
+
+<BLOCKQUOTE><PRE>
+extract_systematic <I>gen-file systematic-file</I>
+</PRE></BLOCKQUOTE>
+
+<P>Given a generator matrix in <TT><I>gen-file</I></TT>, this
+program writes the positions of the systematic bits in a codeword to the
+file <TT><I>systematic-file</I></TT>. The output file has the list of systematic positions, one on each line.
 
 <HR>
 

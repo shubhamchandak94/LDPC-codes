@@ -13,14 +13,14 @@ probability of receiving the data that was actually received if the
 codeword is question were the one that was sent.  This software
 presently deals only with memoryless channels, in which the noise is
 independent from bit to bit.  For such a channel, the likelihood
-factorizes into a product of likelihoods for each bit.  
+factorizes into a product of likelihoods for each bit.
 
 For decoding purposes, all that matters is the relative likelihood
 for a bit to be 1 versus 0.  This is captured by the <I>likelihood
 ratio</I> in favour of a 1, which is P(data | bit is 1) / P(data |
-bit is 0).  
+bit is 0).
 
-<P>For a Binary Symmetric Channel with error probability <I>p</I>, 
+<P>For a Binary Symmetric Channel with error probability <I>p</I>,
 the likelihood ratio in favour of a 1 bit is as follows:
 <BLOCKQUOTE>
   If the received data was +1: (1-<I>p</I>) / <I>p</I><BR>
@@ -129,21 +129,21 @@ bit may appear time consuming, requiring that all possible
 combinations of values for the other bits participating in the check
 be considered.  Fortunately, there is a short cut.  One can calculate
 <BLOCKQUOTE>
- <I>t</I> 
- = product of [ 1 / (1+<I>p<SUB><SMALL>i</SMALL></SUB></I>) 
-              - <I>p<SUB><SMALL>i</SMALL></SUB></I> / 
+ <I>t</I>
+ = product of [ 1 / (1+<I>p<SUB><SMALL>i</SMALL></SUB></I>)
+              - <I>p<SUB><SMALL>i</SMALL></SUB></I> /
                       (1+<I>p<SUB><SMALL>i</SMALL></SUB></I>) ]
  = product of [ 2 / (1+<I>p<SUB><SMALL>i</SMALL></SUB></I>) - 1 ]
 </BLOCKQUOTE>
 where the product is over the probability ratios
 <I>p<SUB><SMALL>i</SMALL></SUB></I> for the other bits participating
 in this check.  Factor <I>i</I> in this product is equal to probability
-of bit <I>i</I> being 0 minus the probability that it is 1.  The terms 
-in the expansion of this product (in the first form above) correspond to 
-possible combinations of values for the other bits, with the result that 
-<I>t</I> will be the probability of the check being satisfied if the bit 
-in question is 0 minus the probability if the bit in question is 1.  The 
-likelihood ratio for this check with respect to the bit in question can then 
+of bit <I>i</I> being 0 minus the probability that it is 1.  The terms
+in the expansion of this product (in the first form above) correspond to
+possible combinations of values for the other bits, with the result that
+<I>t</I> will be the probability of the check being satisfied if the bit
+in question is 0 minus the probability if the bit in question is 1.  The
+likelihood ratio for this check with respect to the bit in question can then
 be calculated as (1-<I>t</I>)/(1+<I>t</I>).
 
 <P>For a particular check, the product above differs for different
@@ -155,7 +155,7 @@ bit, the factors for the first two bits, etc., and also running
 products of the factor for the last bit, the factors for the last two
 bits, etc.  Multiplying the running product of the factors up to
 <I>i</I>-1 by the running product of the factors from <I>i</I>+1 on
-gives the product needed for bit <I>i</I>.  The second form of the 
+gives the product needed for bit <I>i</I>.  The second form of the
 factors above is used, as it requires less computation, and is still
 well defined even if some ratios are infinite.
 
@@ -164,7 +164,7 @@ check, all that is need is to multiply together the likelihood ratio
 for this bit derived from the received data (see above), and the
 current values of the likelihood ratios for all the <I>other</I>
 checks that this bit participates in, with respect to this bit.  To
-save time, these products are computed by combining forward and 
+save time, these products are computed by combining forward and
 backward products, similarly to the method used for likelihood ratios.
 
 <P>By including likelihood ratios from all checks, a similar
@@ -194,6 +194,9 @@ bsc <I>error-probability</I>
 awgn <I>standard-deviation</I>
 
 awln <I>width</I>
+
+misc <I>0.0</I>
+
 </PRE></BLOCKQUOTE>
 and <TT><I>method</I></TT> is one of:
 <BLOCKQUOTE><PRE>
@@ -232,12 +235,12 @@ The information for each block is as follows:
 <BLOCKQUOTE>
 <TABLE>
 <tr align="left" valign="top">
-  <td> <B>block</B> </td> 
+  <td> <B>block</B> </td>
   <td>The number of the block, from zero</td></tr>
 <tr align="left" valign="top">
-  <td> <B>iterations</B> </td> 
+  <td> <B>iterations</B> </td>
   <td>The number of "iterations" used in decoding.  What exactly an iteration
-      is depends on the decoding method used (see 
+      is depends on the decoding method used (see
       <A HREF="decode-detail.html">here</A>).</td></tr>
 <tr align="left" valign="top">
   <td> <B>valid</B> </td>
@@ -249,7 +252,7 @@ The information for each block is as follows:
       likelihood ratios are exactly one contribute 0.5 to this count.</td></tr>
 </TABLE>
 </BLOCKQUOTE>
-The file produced is is suitable for 
+The file produced is is suitable for
 reading into the S-Plus or R statistics packages, with a command such as
 <BLOCKQUOTE><PRE>
 data <- read.table(<I>file</I>,header=T)
@@ -267,15 +270,17 @@ name arguments.  This may currently be either <TT>bsc</TT> (or
 <TT>awln</TT> (or <TT>AWLN</TT>) for the Additive White Logistic Noise
 channel.  The channel type is followed by an argument specifying the
 assumed characteristics of the channel, as follows:
-<BLOCKQUOTE> 
+<BLOCKQUOTE>
 <P>BSC: The probability that a bit will be flipped by noise - ie, the
         probability that the bit received is an error.
 
-<P>AWGN: The standard deviation of the Gaussian noise added to the 
+<P>AWGN: The standard deviation of the Gaussian noise added to the
          encodings of the bits.
 
-<P>AWLN: The width parameter of the logistic distribution for the noise 
+<P>AWLN: The width parameter of the logistic distribution for the noise
          that is added to the encodings of the bits.
+
+<P>MISC: Placeholder parameter that is ignored.
 </BLOCKQUOTE>
 See the description of <A HREF="channel.html">channel transmission</A>
 for more about these channels.
@@ -305,9 +310,9 @@ algorithm stops once the tentative decoding, based on bit-by-bit
 probabilities, is a valid codeword.  Note that continuing to the
 maximum number of iterations will usually result in
 at least slightly different bit probabilities (written to
-<TT><I>bp-file</I></TT> if specified), and could conceivably change 
+<TT><I>bp-file</I></TT> if specified), and could conceivably change
 the decoding compared to stopping at the first valid codeword, or
-result in a failure to decode to a valid codeword even though one was 
+result in a failure to decode to a valid codeword even though one was
 found earlier.
 
 <P>If the <B>-f</B> option is given, output to <TT><I>decoded-file</I></TT>
