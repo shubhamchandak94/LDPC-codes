@@ -7,7 +7,7 @@ Copyright information can be found there, and in the file COPYRIGHT.
 
 Website with documentation: https://shubhamchandak94.github.io/LDPC-codes/
 
----
+----
 
 This is a fork of https://github.com/radfordneal/LDPC-codes with two major additions:
 1. Miscellaneous channel - the original repository provided a few channels for decoding,
